@@ -21,7 +21,6 @@ public class VRSolution {
 
 	// Students should implement another solution
 	public void betterSolution() {
-
 	}
 
 	// Calculate the total journey
