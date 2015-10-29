@@ -1,9 +1,11 @@
 import java.util.*;
+
 import java.io.*;
 
 public class VRSolution {
 	public VRProblem prob;
 	public List<List<Customer>> soln;
+	public List<Route> routeList;
 
 	public VRSolution(VRProblem problem) {
 		this.prob = problem;
@@ -21,6 +23,46 @@ public class VRSolution {
 
 	// Students should implement another solution
 	public void betterSolution() {
+		this.soln = new ArrayList<List<Customer>>();
+		this.routeList = new ArrayList<Route>();
+		for (int i = 0; i < prob.customers.size(); i++) {
+			for (int j = 0; j < prob.customers.size(); j++) {
+				Customer ci = prob.customers.get(i);
+				Customer cj = prob.customers.get(j);
+				Customer d = prob.depot;
+				if (i != j) {
+					Route route = new Route(prob.depot);
+					route.addCustomer(ci);
+					route.addCustomer(cj);
+					routeList.add(route);
+				}
+			}
+		}
+		sortRoutes();
+	}
+
+	private void sortRoutes() {
+		for (int i = 0; i < routeList.size(); i++) {
+			for (int j = i; j < routeList.size(); j++) {
+				Route ri = routeList.get(i);
+				Route rj = routeList.get(j);
+				if (i != j) {
+					Route r1 = routeList.get(i);
+					Route r2 = routeList.get(j);
+					if (r1.get_customerList().get(0).equals(r2.get_customerList().get(1))
+							&& (r1.get_customerList().get(1).equals(r2.get_customerList().get(0)))) {
+						routeList.remove(j);
+						j--;
+					}
+				}
+			}
+		}
+		Collections.sort(routeList, new Comparator<Route>() {
+			@Override
+			public int compare(Route r1, Route r2) {
+				return Double.compare(r1.get_saving(), r2.get_saving());
+			}
+		});
 	}
 
 	// Calculate the total journey
