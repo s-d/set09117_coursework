@@ -57,8 +57,9 @@ public class VRSolution {
 		this.routeList = new ArrayList<Route>();
 		for (Route r : pairs) {
 			Customer c0 = r.get_customerList().get(0);
-			Customer c1 = r.get_customerList().get(r.get_customerList().size() - 1);
+			Customer c1 = r.get_customerList().get(1);
 			boolean cust0 = false, cust1 = false;
+			// check if either customer from pair is already route
 			for (Route route : routeList) {
 				if (route.get_customerList().contains(c0)) {
 					cust0 = true;
@@ -67,55 +68,40 @@ public class VRSolution {
 					cust1 = true;
 				}
 			}
+			// if neither customer is in route
 			if (cust0 == false && cust1 == false) {
 				if (c0.c + c1.c <= prob.depot.c) {
 					Route newR = new Route();
 					newR.addCustomer(c0);
 					newR.addCustomer(c1);
 					routeList.add(newR);
-
+				}
+				// if first customer not in route
+			} else if (cust0 == false) {
+				for (Route route : routeList) {
+					if (route.get_lastDelivery() == c1) {
+						if ((route.get_requirment() + c0.c) <= prob.depot.c) {
+							route.addCustomer(c0);
+						}
+					} else if (route.get_customerList().get(0) == c1) {
+						if ((route.get_requirment() + c0.c) <= prob.depot.c) {
+							route.addToStart(c0);
+						}
+					}
 				}
 			} else if (cust1 == false) {
 				for (Route route : routeList) {
 					if (route.get_lastDelivery() == c0) {
 						if ((route.get_requirment() + c1.c) <= prob.depot.c) {
 							route.addCustomer(c1);
-							break;
 						}
-					}
-				}
-			} else if (cust0 == false) {
-				for (Route route : routeList) {
-					if (route.get_lastDelivery() == c1) {
-						if ((route.get_requirment() + c0.c) <= prob.depot.c) {
-							route.addToStart(c0);
-							break;
+					} else if (route.get_customerList().get(0) == c0) {
+						if ((route.get_requirment() + c1.c) <= prob.depot.c) {
+							route.addToStart(c1);
 						}
 					}
 				}
 			}
-			// Route merged = null;
-			// for (Route routeX : routeList) {
-			// if (merged != null)
-			// break;
-			// if (routeX.get_lastDelivery() == c0) {
-			// for (Route routeY : routeList) {
-			// if (routeY.get_customerList().get(0) == c1) {
-			// if (routeX != routeY) {
-			// Route temp = routeX;
-			// temp.merge(routeY);
-			// if (routeY.get_requirment() <= prob.depot.c) {
-			// routeX.merge(routeY);
-			// merged = routeY;
-			// break;
-			// }
-			// }
-			// }
-			// }
-			// }
-			// }
-			// if (merged != null)
-			// routeList.remove(merged);
 		}
 		for (Route r : routeList) {
 			soln.add(r.get_customerList());
