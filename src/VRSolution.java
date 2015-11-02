@@ -5,7 +5,8 @@ import java.io.*;
 public class VRSolution {
 	public VRProblem prob;
 	public List<List<Customer>> soln;
-	public List<Route> savings;
+	public List<Route> pairs;
+	public List<Route> routeList;
 
 	public VRSolution(VRProblem problem) {
 		this.prob = problem;
@@ -23,8 +24,7 @@ public class VRSolution {
 
 	// Students should implement another solution
 	public void betterSolution() {
-		this.soln = new ArrayList<List<Customer>>();
-		this.savings = new ArrayList<Route>();
+		this.pairs = new ArrayList<Route>();
 		for (int i = 0; i < prob.customers.size(); i++) {
 			for (int j = 0; j < prob.customers.size(); j++) {
 				Customer ci = prob.customers.get(i);
@@ -34,40 +34,111 @@ public class VRSolution {
 					Route route = new Route(prob.depot);
 					route.addCustomer(ci);
 					route.addCustomer(cj);
-					savings.add(route);
+					pairs.add(route);
 				}
 			}
 		}
 
-		System.out.println(savings.size());
-		for (Route r : savings) {
+		// System.out.println(savings.size());
+		for (Route r : pairs) {
 			r.calcSaving();
-			System.out.println(r.get_saving());
+			// System.out.println(r.get_saving());
 		}
 		sortRoutes();
-		System.out.println(savings.size());
-		for (Route r : savings) {
-			System.out.println(r.get_saving());
+		// System.out.println(savings.size());
+		// for (Route r : savings) {
+		// System.out.println(r.get_saving());
+		// }
+		buildRoutes();
+	}
+
+	private void buildRoutes() {
+		this.soln = new ArrayList<List<Customer>>();
+		this.routeList = new ArrayList<Route>();
+		for (Route r : pairs) {
+			Customer c0 = r.get_customerList().get(0);
+			Customer c1 = r.get_customerList().get(r.get_customerList().size() - 1);
+			boolean cust0 = false, cust1 = false;
+			for (Route route : routeList) {
+				if (route.get_customerList().contains(c0)) {
+					cust0 = true;
+				}
+				if (route.get_customerList().contains(c1)) {
+					cust1 = true;
+				}
+			}
+			if (cust0 == false && cust1 == false) {
+				if (c0.c + c1.c <= prob.depot.c) {
+					Route newR = new Route();
+					newR.addCustomer(c0);
+					newR.addCustomer(c1);
+					routeList.add(newR);
+
+				}
+			} else if (cust1 == false) {
+				for (Route route : routeList) {
+					if (route.get_lastDelivery() == c0) {
+						if ((route.get_requirment() + c1.c) <= prob.depot.c) {
+							route.addCustomer(c1);
+							break;
+						}
+					}
+				}
+			} else if (cust0 == false) {
+				for (Route route : routeList) {
+					if (route.get_lastDelivery() == c1) {
+						if ((route.get_requirment() + c0.c) <= prob.depot.c) {
+							route.addToStart(c0);
+							break;
+						}
+					}
+				}
+			}
+			// Route merged = null;
+			// for (Route routeX : routeList) {
+			// if (merged != null)
+			// break;
+			// if (routeX.get_lastDelivery() == c0) {
+			// for (Route routeY : routeList) {
+			// if (routeY.get_customerList().get(0) == c1) {
+			// if (routeX != routeY) {
+			// Route temp = routeX;
+			// temp.merge(routeY);
+			// if (routeY.get_requirment() <= prob.depot.c) {
+			// routeX.merge(routeY);
+			// merged = routeY;
+			// break;
+			// }
+			// }
+			// }
+			// }
+			// }
+			// }
+			// if (merged != null)
+			// routeList.remove(merged);
+		}
+		for (Route r : routeList) {
+			soln.add(r.get_customerList());
 		}
 	}
 
 	private void sortRoutes() {
-		for (int i = 0; i < savings.size(); i++) {
-			for (int j = i; j < savings.size(); j++) {
-				Route ri = savings.get(i);
-				Route rj = savings.get(j);
+		for (int i = 0; i < pairs.size(); i++) {
+			for (int j = i; j < pairs.size(); j++) {
+				Route ri = pairs.get(i);
+				Route rj = pairs.get(j);
 				if (i != j) {
-					Route r1 = savings.get(i);
-					Route r2 = savings.get(j);
+					Route r1 = pairs.get(i);
+					Route r2 = pairs.get(j);
 					if (r1.get_customerList().get(0).equals(r2.get_customerList().get(1))
 							&& (r1.get_customerList().get(1).equals(r2.get_customerList().get(0)))) {
-						savings.remove(j);
+						pairs.remove(j);
 						j--;
 					}
 				}
 			}
 		}
-		Collections.sort(savings, new Comparator<Route>() {
+		Collections.sort(pairs, new Comparator<Route>() {
 			@Override
 			public int compare(Route r1, Route r2) {
 				return Double.compare(r2.get_saving(), r1.get_saving());

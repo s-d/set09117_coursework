@@ -6,16 +6,30 @@ public class Route {
 	private Customer _depot;
 	private double _saving;
 	private int _requirment;
-	private int _capacity;
 	private boolean _pair;
+	private Customer _lastDelivery;
 
 	public Route(Customer depot) {
 		_customerList = new ArrayList<Customer>();
 		this._depot = depot;
 		_saving = 0;
 		_requirment = 0;
-		_capacity = depot.c;
 		_pair = false;
+	}
+
+	public Route() {
+		_customerList = new ArrayList<Customer>();
+		_saving = 0;
+		_requirment = 0;
+		_pair = false;
+	}
+
+	public void merge(Route r) {
+		for (Customer c : r.get_customerList()) {
+			if (this._customerList.contains(c) == false) {
+				addCustomer(c);
+			}
+		}
 	}
 
 	public void calcSaving() {
@@ -34,6 +48,15 @@ public class Route {
 	public void addCustomer(Customer cust) {
 		_customerList.add(cust);
 		_requirment += cust.c;
+		_lastDelivery = cust;
+		if (this._customerList.size() == 2) {
+			_pair = true;
+		}
+	}
+
+	public void addToStart(Customer cust) {
+		_customerList.add(0, cust);
+		_requirment += cust.c;
 		if (this._customerList.size() == 2) {
 			_pair = true;
 		}
@@ -49,5 +72,9 @@ public class Route {
 
 	public int get_requirment() {
 		return _requirment;
+	}
+
+	public Customer get_lastDelivery() {
+		return _lastDelivery;
 	}
 }

@@ -1,12 +1,6 @@
 <?xml version='1.0'?>
 <!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' '../../svg11-flat.dtd'>
 <svg width='8cm' height='8cm' viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg' version='1.1'>
-<path d='M250.0 250.0 L149.0 194.0L241.0 66.0L70.0 61.0L125.0 3.0L115.0 14.0z' stroke='chocolate' fill='none' stroke-width='2'/>
-<path d='M250.0 250.0 L111.0 180.0L60.0 469.0L48.0 317.0L44.0 348.0L25.0 217.0L139.0 242.0z' stroke='cornflowerblue' fill='none' stroke-width='2'/>
-<path d='M250.0 250.0 L336.0 227.0L330.0 206.0L400.0 144.0L483.0 105.0L432.0 161.0L386.0 121.0L291.0 211.0z' stroke='crimson' fill='none' stroke-width='2'/>
-<path d='M250.0 250.0 L275.0 231.0L268.0 136.0L331.0 97.0L324.0 71.0L321.0 124.0z' stroke='cyan' fill='none' stroke-width='2'/>
-<path d='M250.0 250.0 L165.0 298.0L292.0 474.0L164.0 375.0L156.0 426.0z' stroke='darkblue' fill='none' stroke-width='2'/>
-<path d='M250.0 250.0 L452.0 342.0L326.0 352.0L261.0 296.0z' stroke='darkcyan' fill='none' stroke-width='2'/>
 <g transform='translate(268,136)'><circle cx='0' cy='0' r='10' fill='pink' stroke='black' stroke-width='1'/><text text-anchor='middle' y='5'>4</text></g>
 <g transform='translate(111,180)'><circle cx='0' cy='0' r='10' fill='pink' stroke='black' stroke-width='1'/><text text-anchor='middle' y='5'>4</text></g>
 <g transform='translate(452,342)'><circle cx='0' cy='0' r='10' fill='pink' stroke='black' stroke-width='1'/><text text-anchor='middle' y='5'>4</text></g>
