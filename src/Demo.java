@@ -3,7 +3,7 @@ public class Demo {
 
 	public static void main(String[] args) throws Exception {
 
-		VRProblem p = new VRProblem("src/test_data/rand00010prob.csv");
+		VRProblem p = new VRProblem("src/test_data/rand00050prob.csv");
 		VRSolution s = new VRSolution(p);
 
 		s.betterSolution();

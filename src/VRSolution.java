@@ -5,7 +5,7 @@ import java.io.*;
 public class VRSolution {
 	public VRProblem prob;
 	public List<List<Customer>> soln;
-	public List<Route> routeList;
+	public List<Route> savings;
 
 	public VRSolution(VRProblem problem) {
 		this.prob = problem;
@@ -24,7 +24,7 @@ public class VRSolution {
 	// Students should implement another solution
 	public void betterSolution() {
 		this.soln = new ArrayList<List<Customer>>();
-		this.routeList = new ArrayList<Route>();
+		this.savings = new ArrayList<Route>();
 		for (int i = 0; i < prob.customers.size(); i++) {
 			for (int j = 0; j < prob.customers.size(); j++) {
 				Customer ci = prob.customers.get(i);
@@ -34,33 +34,43 @@ public class VRSolution {
 					Route route = new Route(prob.depot);
 					route.addCustomer(ci);
 					route.addCustomer(cj);
-					routeList.add(route);
+					savings.add(route);
 				}
 			}
 		}
+
+		System.out.println(savings.size());
+		for (Route r : savings) {
+			r.calcSaving();
+			System.out.println(r.get_saving());
+		}
 		sortRoutes();
+		System.out.println(savings.size());
+		for (Route r : savings) {
+			System.out.println(r.get_saving());
+		}
 	}
 
 	private void sortRoutes() {
-		for (int i = 0; i < routeList.size(); i++) {
-			for (int j = i; j < routeList.size(); j++) {
-				Route ri = routeList.get(i);
-				Route rj = routeList.get(j);
+		for (int i = 0; i < savings.size(); i++) {
+			for (int j = i; j < savings.size(); j++) {
+				Route ri = savings.get(i);
+				Route rj = savings.get(j);
 				if (i != j) {
-					Route r1 = routeList.get(i);
-					Route r2 = routeList.get(j);
+					Route r1 = savings.get(i);
+					Route r2 = savings.get(j);
 					if (r1.get_customerList().get(0).equals(r2.get_customerList().get(1))
 							&& (r1.get_customerList().get(1).equals(r2.get_customerList().get(0)))) {
-						routeList.remove(j);
+						savings.remove(j);
 						j--;
 					}
 				}
 			}
 		}
-		Collections.sort(routeList, new Comparator<Route>() {
+		Collections.sort(savings, new Comparator<Route>() {
 			@Override
 			public int compare(Route r1, Route r2) {
-				return Double.compare(r1.get_saving(), r2.get_saving());
+				return Double.compare(r2.get_saving(), r1.get_saving());
 			}
 		});
 	}
