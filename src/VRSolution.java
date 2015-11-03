@@ -26,6 +26,7 @@ public class VRSolution {
 	public void betterSolution() {
 		this.pairs = new ArrayList<Route>();
 		Route.set_depot(prob.depot);
+		System.out.println("creating pairs...");
 		for (int i = 0; i < prob.customers.size(); i++) {
 			for (int j = 0; j < prob.customers.size(); j++) {
 				Customer ci = prob.customers.get(i);
@@ -38,12 +39,21 @@ public class VRSolution {
 				}
 			}
 		}
-
+		System.out.println("pairs created.");
+		System.out.println("calculating savings for each pair...");
 		for (Route r : pairs) {
 			r.calcSaving();
 		}
-		sortRoutes();
+		System.out.println("savings calcualted.");
+		System.out.println("removing duplicates...");
+		removeMirrors();
+		System.out.println("duplicates removed.");
+		System.out.println("sorting pairs...");
+		sortPairs();
+		System.out.println("sorting complete.");
+		System.out.println("building routes...");
 		buildRoutes();
+		System.out.println("routes complete.");
 	}
 
 	private void buildRoutes() {
@@ -104,13 +114,21 @@ public class VRSolution {
 				}
 			}
 		}
-
 		for (Route r : routeList) {
 			soln.add(r.get_customerList());
 		}
 	}
 
-	private void sortRoutes() {
+	private void sortPairs() {
+		Collections.sort(pairs, new Comparator<Route>() {
+			@Override
+			public int compare(Route r1, Route r2) {
+				return Double.compare(r2.get_saving(), r1.get_saving());
+			}
+		});
+	}
+
+	private void removeMirrors() {
 		for (int i = 0; i < pairs.size(); i++) {
 			for (int j = i; j < pairs.size(); j++) {
 				if (i != j) {
@@ -124,12 +142,6 @@ public class VRSolution {
 				}
 			}
 		}
-		Collections.sort(pairs, new Comparator<Route>() {
-			@Override
-			public int compare(Route r1, Route r2) {
-				return Double.compare(r2.get_saving(), r1.get_saving());
-			}
-		});
 	}
 
 	// Calculate the total journey

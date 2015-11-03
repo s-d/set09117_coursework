@@ -2,7 +2,7 @@
 public class Run {
 
 	public static void main(String[] args) throws Exception {
-		String problem = "rand01000prob";
+		String problem = "rand00300prob";
 		double srCost, cwCost;
 
 		System.out.println(problem);
