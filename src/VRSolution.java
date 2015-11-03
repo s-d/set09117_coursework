@@ -25,15 +25,15 @@ public class VRSolution {
 	// Students should implement another solution
 	public void betterSolution() {
 		this.pairs = new ArrayList<Route>();
+		Route.set_depot(prob.depot);
 		for (int i = 0; i < prob.customers.size(); i++) {
 			for (int j = 0; j < prob.customers.size(); j++) {
 				Customer ci = prob.customers.get(i);
 				Customer cj = prob.customers.get(j);
-				Customer d = prob.depot;
 				if (i != j) {
-					Route route = new Route(prob.depot);
-					route.addCustomer(ci);
-					route.addCustomer(cj);
+					Route route = new Route();
+					route.addToEnd(ci);
+					route.addToEnd(cj);
 					pairs.add(route);
 				}
 			}
@@ -50,8 +50,8 @@ public class VRSolution {
 		this.soln = new ArrayList<List<Customer>>();
 		this.routeList = new ArrayList<Route>();
 		for (Route r : pairs) {
-			Customer c0 = r.get_customerList().get(0);
-			Customer c1 = r.get_customerList().get(1);
+			Customer c0 = r.getFirstCustomer();
+			Customer c1 = r.getLastCustomer();
 			boolean cust0 = false, cust1 = false;
 			// check if either customer from pair is already route
 			for (Route route : routeList) {
@@ -68,20 +68,20 @@ public class VRSolution {
 				if (c0.c + c1.c <= prob.depot.c) {
 					// makes new route out of pair
 					Route newR = new Route();
-					newR.addCustomer(c0);
-					newR.addCustomer(c1);
+					newR.addToEnd(c0);
+					newR.addToEnd(c1);
 					routeList.add(newR);
 				}
 				// if first customer not in route
 			} else if (cust0 == false) {
 				for (Route route : routeList) {
 					// check if customer can be added to end of route
-					if (route.get_lastDelivery() == c1) {
+					if (route.getLastCustomer() == c1) {
 						if ((route.get_requirment() + c0.c) <= prob.depot.c) {
-							route.addCustomer(c0);
+							route.addToEnd(c0);
 						}
 						// check if customer can be added to front of route
-					} else if (route.get_customerList().get(0) == c1) {
+					} else if (route.getFirstCustomer() == c1) {
 						if ((route.get_requirment() + c0.c) <= prob.depot.c) {
 							route.addToStart(c0);
 						}
@@ -91,12 +91,12 @@ public class VRSolution {
 			} else if (cust1 == false) {
 				for (Route route : routeList) {
 					// check if it can be added to end of existing route
-					if (route.get_lastDelivery() == c0) {
+					if (route.getLastCustomer() == c0) {
 						if ((route.get_requirment() + c1.c) <= prob.depot.c) {
-							route.addCustomer(c1);
+							route.addToEnd(c1);
 						}
 						// check if it can be added to front of route
-					} else if (route.get_customerList().get(0) == c0) {
+					} else if (route.getFirstCustomer() == c0) {
 						if ((route.get_requirment() + c1.c) <= prob.depot.c) {
 							route.addToStart(c1);
 						}
@@ -113,8 +113,6 @@ public class VRSolution {
 	private void sortRoutes() {
 		for (int i = 0; i < pairs.size(); i++) {
 			for (int j = i; j < pairs.size(); j++) {
-				Route ri = pairs.get(i);
-				Route rj = pairs.get(j);
 				if (i != j) {
 					Route r1 = pairs.get(i);
 					Route r2 = pairs.get(j);
