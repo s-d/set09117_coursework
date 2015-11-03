@@ -39,16 +39,10 @@ public class VRSolution {
 			}
 		}
 
-		// System.out.println(savings.size());
 		for (Route r : pairs) {
 			r.calcSaving();
-			// System.out.println(r.get_saving());
 		}
 		sortRoutes();
-		// System.out.println(savings.size());
-		// for (Route r : savings) {
-		// System.out.println(r.get_saving());
-		// }
 		buildRoutes();
 	}
 
@@ -70,7 +64,9 @@ public class VRSolution {
 			}
 			// if neither customer is in route
 			if (cust0 == false && cust1 == false) {
+				// check that pair does not go over capacity
 				if (c0.c + c1.c <= prob.depot.c) {
+					// makes new route out of pair
 					Route newR = new Route();
 					newR.addCustomer(c0);
 					newR.addCustomer(c1);
@@ -79,22 +75,27 @@ public class VRSolution {
 				// if first customer not in route
 			} else if (cust0 == false) {
 				for (Route route : routeList) {
+					// check if customer can be added to end of route
 					if (route.get_lastDelivery() == c1) {
 						if ((route.get_requirment() + c0.c) <= prob.depot.c) {
 							route.addCustomer(c0);
 						}
+						// check if customer can be added to front of route
 					} else if (route.get_customerList().get(0) == c1) {
 						if ((route.get_requirment() + c0.c) <= prob.depot.c) {
 							route.addToStart(c0);
 						}
 					}
 				}
+				// if second customer is not in a route
 			} else if (cust1 == false) {
 				for (Route route : routeList) {
+					// check if it can be added to end of existing route
 					if (route.get_lastDelivery() == c0) {
 						if ((route.get_requirment() + c1.c) <= prob.depot.c) {
 							route.addCustomer(c1);
 						}
+						// check if it can be added to front of route
 					} else if (route.get_customerList().get(0) == c0) {
 						if ((route.get_requirment() + c1.c) <= prob.depot.c) {
 							route.addToStart(c1);
@@ -103,6 +104,7 @@ public class VRSolution {
 				}
 			}
 		}
+
 		for (Route r : routeList) {
 			soln.add(r.get_customerList());
 		}
