@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Route {
 
@@ -19,12 +20,9 @@ public class Route {
 		if (_pair) {
 			Customer d, c1, c2;
 			d = _depot;
-			c1 = _customerList.get(0);
-			c2 = _customerList.get(1);
+			c1 = getFirstCustomer();
+			c2 = getLastCustomer();
 			_saving = (d.distance(c1) + d.distance(c2)) - c1.distance(c2);
-		} else {
-			// TODO
-			// Implement saving calculation for more than 2 customers
 		}
 	}
 

@@ -1,64 +1,86 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 public class ClarkeWrightAlg {
-	private List<Route> _pairs;
+	// variables
+	private ArrayList<Route> _pairs;
 	private VRProblem _prob;
-	private List<Route> _routeList;
-	List<List<Customer>> soln = new ArrayList<List<Customer>>();
+	private ArrayList<Route> _routeList;
+	private ArrayList<ArrayList<Customer>> _soln;
 
-	public List<List<Customer>> betterSolution(VRProblem prob) {
+	// create routes using Clarke Wright Algorithm
+	public ArrayList<ArrayList<Customer>> solution(VRProblem prob) {
 		this._prob = prob;
-		this._pairs = new ArrayList<Route>();
-		Route.set_depot(prob.depot);
-		System.out.println("creating pairs...");
-		for (int i = 0; i < prob.customers.size(); i++) {
-			for (int j = 0; j < prob.customers.size(); j++) {
-				Customer ci = prob.customers.get(i);
-				Customer cj = prob.customers.get(j);
-				if (i != j) {
-					Route route = new Route();
-					route.addToEnd(ci);
-					route.addToEnd(cj);
-					_pairs.add(route);
-				}
-			}
-		}
-		System.out.println("pairs created.");
-		System.out.println("calculating savings for each pair...");
+		this._soln = new ArrayList<ArrayList<Customer>>();
+		createPairs();
+
+		Route.set_depot(_prob.depot);
 		for (Route r : _pairs) {
 			r.calcSaving();
 		}
-		System.out.println("savings calcualted.");
-		System.out.println("removing duplicates...");
 		removeMirrors();
-		System.out.println("duplicates removed.");
-		System.out.println("sorting pairs...");
 		sortPairs();
-		System.out.println("sorting complete.");
-		System.out.println("building routes...");
 		buildRoutes();
-		System.out.println("routes complete.");
-		return soln;
+		return _soln;
 	}
 
+	// creates routes for every possible pair of customers
 	private void createPairs() {
+		// set the depot of all routes so costs can be calculated later
 		Route.set_depot(_prob.depot);
-		System.out.println("creating pairs...");
+		// declare ArrayList for storage of pairs
+		this._pairs = new ArrayList<Route>();
+		// loop through every customer
 		for (int i = 0; i < _prob.customers.size(); i++) {
+			// loop through every customer
 			for (int j = 0; j < _prob.customers.size(); j++) {
-				Customer ci = _prob.customers.get(i);
-				Customer cj = _prob.customers.get(j);
+				// if the pair is not the same customer twice
 				if (i != j) {
+					// create a new route
 					Route route = new Route();
-					route.addToEnd(ci);
-					route.addToEnd(cj);
+					// add each customer to route
+					route.addToEnd(_prob.customers.get(i));
+					route.addToEnd(_prob.customers.get(j));
+					// add route to ArrayList
 					_pairs.add(route);
 				}
 			}
 		}
+	}
+
+	// remove any redundant pairs
+	private void removeMirrors() {
+		// loop through every pair
+		for (int i = 0; i < _pairs.size(); i++) {
+			// loop through every pair after i
+			for (int j = i; j < _pairs.size(); j++) {
+				// if both pairs are not the same
+				if (i != j) {
+					// assign temporary objects
+					Route r1 = _pairs.get(i);
+					Route r2 = _pairs.get(j);
+					// if routes mirror each other
+					if (r1.get_customerList().get(0).equals(r2.get_customerList().get(1))
+							&& (r1.get_customerList().get(1).equals(r2.get_customerList().get(0)))) {
+						// remove redundant pair
+						_pairs.remove(j);
+						// decrement j to ensure position is kept
+						j--;
+					}
+				}
+			}
+		}
+	}
+
+	// sort pairs so highest savings are first
+	private void sortPairs() {
+		Collections.sort(_pairs, new Comparator<Route>() {
+			@Override
+			public int compare(Route r1, Route r2) {
+				return Double.compare(r2.get_saving(), r1.get_saving());
+			}
+		});
 	}
 
 	private void buildRoutes() {
@@ -122,34 +144,7 @@ public class ClarkeWrightAlg {
 			}
 		}
 		for (Route r : _routeList) {
-			soln.add(r.get_customerList());
-
-		}
-
-	}
-
-	private void sortPairs() {
-		Collections.sort(_pairs, new Comparator<Route>() {
-			@Override
-			public int compare(Route r1, Route r2) {
-				return Double.compare(r2.get_saving(), r1.get_saving());
-			}
-		});
-	}
-
-	private void removeMirrors() {
-		for (int i = 0; i < _pairs.size(); i++) {
-			for (int j = i; j < _pairs.size(); j++) {
-				if (i != j) {
-					Route r1 = _pairs.get(i);
-					Route r2 = _pairs.get(j);
-					if (r1.get_customerList().get(0).equals(r2.get_customerList().get(1))
-							&& (r1.get_customerList().get(1).equals(r2.get_customerList().get(0)))) {
-						_pairs.remove(j);
-						j--;
-					}
-				}
-			}
+			_soln.add(r.get_customerList());
 		}
 	}
 
