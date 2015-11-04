@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ClarkeWrightAlg {
 	// variables
@@ -142,10 +144,34 @@ public class ClarkeWrightAlg {
 				}
 			}
 		}
+		sortRoutes();
+		for (int i = 0; i < _routeList.size(); i++) {
+			for (int j = 0; j < _routeList.size(); j++) {
+				Route r1 = _routeList.get(i);
+				Route r2 = _routeList.get(j);
+
+				if (r1.equals(r2) != true) {
+					int mergeCap = r1.get_requirment() + r2.get_requirment();
+					if (mergeCap <= _prob.depot.c) {
+						r1.merge(r2);
+						_routeList.remove(j);
+					}
+				}
+			}
+
+		}
 		// move routes to solution array
 		for (Route r : _routeList) {
 			_soln.add(r.get_customerList());
 		}
+	}
+
+	private void sortRoutes() {
+		Collections.sort(_routeList, new Comparator<Route>() {
+			public int compare(Route r1, Route r2) {
+				return r2.get_requirment() - r1.get_requirment();
+			}
+		});
 	}
 
 }

@@ -2,11 +2,10 @@
 <!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' '../../svg11-flat.dtd'>
 <svg width='8cm' height='8cm' viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg' version='1.1'>
 <path d='M250.0 250.0 L322.0 410.0L358.0 453.0L370.0 488.0L459.0 470.0L459.0 483.0L415.0 443.0L390.0 440.0L381.0 346.0L316.0 299.0z' stroke='chocolate' fill='none' stroke-width='2'/>
-<path d='M250.0 250.0 L488.0 117.0L462.0 74.0L362.0 17.0L332.0 80.0L319.0 93.0L297.0 130.0L266.0 158.0z' stroke='cornflowerblue' fill='none' stroke-width='2'/>
-<path d='M250.0 250.0 L265.0 341.0L275.0 465.0L169.0 496.0L135.0 493.0L117.0 470.0L101.0 456.0L128.0 430.0L127.0 410.0L165.0 404.0L162.0 357.0z' stroke='crimson' fill='none' stroke-width='2'/>
-<path d='M250.0 250.0 L420.0 273.0L449.0 276.0L460.0 332.0L494.0 362.0L408.0 365.0L411.0 323.0L336.0 287.0z' stroke='cyan' fill='none' stroke-width='2'/>
-<path d='M250.0 250.0 L147.0 95.0L153.0 17.0L199.0 73.0z' stroke='darkblue' fill='none' stroke-width='2'/>
-<path d='M250.0 250.0 L168.0 248.0L86.0 254.0L104.0 208.0L211.0 236.0z' stroke='darkcyan' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L420.0 273.0L449.0 276.0L460.0 332.0L494.0 362.0L408.0 365.0L411.0 323.0L336.0 287.0z' stroke='cornflowerblue' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L488.0 117.0L462.0 74.0L362.0 17.0L332.0 80.0L319.0 93.0L297.0 130.0L266.0 158.0z' stroke='crimson' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L265.0 341.0L275.0 465.0L169.0 496.0L135.0 493.0L117.0 470.0L101.0 456.0L128.0 430.0L127.0 410.0L165.0 404.0L162.0 357.0L147.0 95.0L153.0 17.0L199.0 73.0z' stroke='cyan' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L168.0 248.0L86.0 254.0L104.0 208.0L211.0 236.0z' stroke='darkblue' fill='none' stroke-width='2'/>
 <g transform='translate(460,332)'><circle cx='0' cy='0' r='10' fill='pink' stroke='black' stroke-width='1'/><text text-anchor='middle' y='5'>9</text></g>
 <g transform='translate(322,410)'><circle cx='0' cy='0' r='10' fill='pink' stroke='black' stroke-width='1'/><text text-anchor='middle' y='5'>1</text></g>
 <g transform='translate(165,404)'><circle cx='0' cy='0' r='10' fill='pink' stroke='black' stroke-width='1'/><text text-anchor='middle' y='5'>1</text></g>
