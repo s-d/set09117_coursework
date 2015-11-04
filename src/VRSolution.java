@@ -23,126 +23,136 @@ public class VRSolution {
 	}
 
 	// Students should implement another solution
+
 	public void betterSolution() {
-		this.pairs = new ArrayList<Route>();
-		Route.set_depot(prob.depot);
-		System.out.println("creating pairs...");
-		for (int i = 0; i < prob.customers.size(); i++) {
-			for (int j = 0; j < prob.customers.size(); j++) {
-				Customer ci = prob.customers.get(i);
-				Customer cj = prob.customers.get(j);
-				if (i != j) {
-					Route route = new Route();
-					route.addToEnd(ci);
-					route.addToEnd(cj);
-					pairs.add(route);
-				}
-			}
-		}
-		System.out.println("pairs created.");
-		System.out.println("calculating savings for each pair...");
-		for (Route r : pairs) {
-			r.calcSaving();
-		}
-		System.out.println("savings calcualted.");
-		System.out.println("removing duplicates...");
-		removeMirrors();
-		System.out.println("duplicates removed.");
-		System.out.println("sorting pairs...");
-		sortPairs();
-		System.out.println("sorting complete.");
-		System.out.println("building routes...");
-		buildRoutes();
-		System.out.println("routes complete.");
+		ClarkeWrightAlg cw = new ClarkeWrightAlg();
+		this.soln = cw.betterSolution(prob);
 	}
 
-	private void buildRoutes() {
-		this.soln = new ArrayList<List<Customer>>();
-		this.routeList = new ArrayList<Route>();
-		for (Route r : pairs) {
-			Customer c0 = r.getFirstCustomer();
-			Customer c1 = r.getLastCustomer();
-			boolean cust0 = false, cust1 = false;
-			// check if either customer from pair is already route
-			for (Route route : routeList) {
-				if (route.get_customerList().contains(c0)) {
-					cust0 = true;
-				}
-				if (route.get_customerList().contains(c1)) {
-					cust1 = true;
-				}
-			}
-			// if neither customer is in route
-			if (cust0 == false && cust1 == false) {
-				// check that pair does not go over capacity
-				if (c0.c + c1.c <= prob.depot.c) {
-					// makes new route out of pair
-					Route newR = new Route();
-					newR.addToEnd(c0);
-					newR.addToEnd(c1);
-					routeList.add(newR);
-				}
-				// if first customer not in route
-			} else if (cust0 == false) {
-				for (Route route : routeList) {
-					// check if customer can be added to end of route
-					if (route.getLastCustomer() == c1) {
-						if ((route.get_requirment() + c0.c) <= prob.depot.c) {
-							route.addToEnd(c0);
-						}
-						// check if customer can be added to front of route
-					} else if (route.getFirstCustomer() == c1) {
-						if ((route.get_requirment() + c0.c) <= prob.depot.c) {
-							route.addToStart(c0);
-						}
-					}
-				}
-				// if second customer is not in a route
-			} else if (cust1 == false) {
-				for (Route route : routeList) {
-					// check if it can be added to end of existing route
-					if (route.getLastCustomer() == c0) {
-						if ((route.get_requirment() + c1.c) <= prob.depot.c) {
-							route.addToEnd(c1);
-						}
-						// check if it can be added to front of route
-					} else if (route.getFirstCustomer() == c0) {
-						if ((route.get_requirment() + c1.c) <= prob.depot.c) {
-							route.addToStart(c1);
-						}
-					}
-				}
-			}
-		}
-		for (Route r : routeList) {
-			soln.add(r.get_customerList());
-		}
-	}
-
-	private void sortPairs() {
-		Collections.sort(pairs, new Comparator<Route>() {
-			@Override
-			public int compare(Route r1, Route r2) {
-				return Double.compare(r2.get_saving(), r1.get_saving());
-			}
-		});
-	}
-
-	private void removeMirrors() {
-		for (int i = 0; i < pairs.size(); i++) {
-			for (int j = i; j < pairs.size(); j++) {
-				if (i != j) {
-					Route r1 = pairs.get(i);
-					Route r2 = pairs.get(j);
-					if (r1.get_customerList().get(0).equals(r2.get_customerList().get(1))
-							&& (r1.get_customerList().get(1).equals(r2.get_customerList().get(0)))) {
-						pairs.remove(j);
-						j--;
-					}
-				}
-			}
-		}
-	}
+	// public void betterSolution() {
+	// this.pairs = new ArrayList<Route>();
+	// Route.set_depot(prob.depot);
+	// System.out.println("creating pairs...");
+	// for (int i = 0; i < prob.customers.size(); i++) {
+	// for (int j = 0; j < prob.customers.size(); j++) {
+	// Customer ci = prob.customers.get(i);
+	// Customer cj = prob.customers.get(j);
+	// if (i != j) {
+	// Route route = new Route();
+	// route.addToEnd(ci);
+	// route.addToEnd(cj);
+	// pairs.add(route);
+	// }
+	// }
+	// }
+	// System.out.println("pairs created.");
+	// System.out.println("calculating savings for each pair...");
+	// for (Route r : pairs) {
+	// r.calcSaving();
+	// }
+	// System.out.println("savings calcualted.");
+	// System.out.println("removing duplicates...");
+	// removeMirrors();
+	// System.out.println("duplicates removed.");
+	// System.out.println("sorting pairs...");
+	// sortPairs();
+	// System.out.println("sorting complete.");
+	// System.out.println("building routes...");
+	// buildRoutes();
+	// System.out.println("routes complete.");
+	// }
+	//
+	// private void buildRoutes() {
+	// // ArrayList for final solution
+	// this.soln = new ArrayList<List<Customer>>();
+	// // ArrayList for routes whilst being built
+	// this.routeList = new ArrayList<Route>();
+	// // loop through every pair of customers
+	// for (Route r : pairs) {
+	// // get first and second customers
+	// Customer p1 = r.getFirstCustomer();
+	// Customer p2 = r.getLastCustomer();
+	// boolean cust0 = false, cust1 = false;
+	// // check if either customer from pair is already route
+	// for (Route route : routeList) {
+	// if (route.get_customerList().contains(p1)) {
+	// cust0 = true;
+	// }
+	// if (route.get_customerList().contains(p2)) {
+	// cust1 = true;
+	// }
+	// }
+	// // if neither customer is in route
+	// if (cust0 == false && cust1 == false) {
+	// // check that pair does not go over capacity
+	// if (p1.c + p2.c <= prob.depot.c) {
+	// // makes new route out of pair
+	// Route newR = new Route();
+	// newR.addToEnd(p1);
+	// newR.addToEnd(p2);
+	// routeList.add(newR);
+	// }
+	// // if first customer not in route
+	// } else if (cust0 == false) {
+	// for (Route route : routeList) {
+	// // check if customer can be added to end of route
+	// if (route.getLastCustomer() == p2) {
+	// if ((route.get_requirment() + p1.c) <= prob.depot.c) {
+	// route.addToEnd(p1);
+	// }
+	// // check if customer can be added to front of route
+	// } else if (route.getFirstCustomer() == p2) {
+	// if ((route.get_requirment() + p1.c) <= prob.depot.c) {
+	// route.addToStart(p1);
+	// }
+	// }
+	// }
+	// // if second customer is not in a route
+	// } else if (cust1 == false) {
+	// for (Route route : routeList) {
+	// // check if it can be added to end of existing route
+	// if (route.getLastCustomer() == p1) {
+	// if ((route.get_requirment() + p2.c) <= prob.depot.c) {
+	// route.addToEnd(p2);
+	// }
+	// // check if it can be added to front of route
+	// } else if (route.getFirstCustomer() == p1) {
+	// if ((route.get_requirment() + p2.c) <= prob.depot.c) {
+	// route.addToStart(p2);
+	// }
+	// }
+	// }
+	// }
+	// }
+	// for (Route r : routeList) {
+	// soln.add(r.get_customerList());
+	// }
+	// }
+	//
+	// private void sortPairs() {
+	// Collections.sort(pairs, new Comparator<Route>() {
+	// @Override
+	// public int compare(Route r1, Route r2) {
+	// return Double.compare(r2.get_saving(), r1.get_saving());
+	// }
+	// });
+	// }
+	//
+	// private void removeMirrors() {
+	// for (int i = 0; i < pairs.size(); i++) {
+	// for (int j = i; j < pairs.size(); j++) {
+	// if (i != j) {
+	// Route r1 = pairs.get(i);
+	// Route r2 = pairs.get(j);
+	// if (r1.get_customerList().get(0).equals(r2.get_customerList().get(1))
+	// && (r1.get_customerList().get(1).equals(r2.get_customerList().get(0)))) {
+	// pairs.remove(j);
+	// j--;
+	// }
+	// }
+	// }
+	// }
+	// }
 
 	// Calculate the total journey
 	public double solnCost() {
