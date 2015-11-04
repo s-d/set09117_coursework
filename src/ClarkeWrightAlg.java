@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class ClarkeWrightAlg {
 	// variables
@@ -20,7 +18,8 @@ public class ClarkeWrightAlg {
 			r.calcSaving();
 		}
 		removeMirrors();
-		sortPairs();
+		_pairs.sort(null);
+
 		buildRoutes();
 		return _soln;
 	}
@@ -65,7 +64,7 @@ public class ClarkeWrightAlg {
 							&& (r1.get_customerList().get(1).equals(r2.get_customerList().get(0)))) {
 						// remove redundant pair
 						_pairs.remove(j);
-						// decrement j to ensure position is kept
+						// decrement j to ensure position is kept relative
 						j--;
 					}
 				}
@@ -73,79 +72,81 @@ public class ClarkeWrightAlg {
 		}
 	}
 
-	// sort pairs so highest savings are first
-	private void sortPairs() {
-		Collections.sort(_pairs, new Comparator<Route>() {
-			@Override
-			public int compare(Route r1, Route r2) {
-				return Double.compare(r2.get_saving(), r1.get_saving());
-			}
-		});
-	}
-
+	// combine pairs to create full routes
 	private void buildRoutes() {
 		// ArrayList for routes whilst being built
 		this._routeList = new ArrayList<Route>();
 		// loop through every pair of customers
 		for (Route r : _pairs) {
-			// get first and second customers
-			Customer p1 = r.getFirstCustomer();
-			Customer p2 = r.getLastCustomer();
-			boolean cust0 = false, cust1 = false;
+			// get customer from pair
+			Customer c1 = r.getFirstCustomer();
+			Customer c2 = r.getLastCustomer();
+			// create booleans for each customer
+			boolean cust1 = false, cust2 = false;
 			// check if either customer from pair is already route
 			for (Route route : _routeList) {
-				if (route.get_customerList().contains(p1)) {
-					cust0 = true;
-				}
-				if (route.get_customerList().contains(p2)) {
+				if (route.get_customerList().contains(c1)) {
 					cust1 = true;
 				}
+				if (route.get_customerList().contains(c2)) {
+					cust2 = true;
+				}
 			}
-			// if neither customer is in route
-			if (cust0 == false && cust1 == false) {
+			// if neither customer is route
+			if (cust1 == false && cust2 == false) {
 				// check that pair does not go over capacity
-				if (p1.c + p2.c <= _prob.depot.c) {
+				if (c1.c + c2.c <= _prob.depot.c) {
 					// makes new route out of pair
 					Route newR = new Route();
-					newR.addToEnd(p1);
-					newR.addToEnd(p2);
+					newR.addToEnd(c1);
+					newR.addToEnd(c2);
 					_routeList.add(newR);
 				}
 				// if first customer not in route
-			} else if (cust0 == false) {
+			} else if (cust1 == false) {
 				for (Route route : _routeList) {
-					// check if customer can be added to end of route
-					if (route.getLastCustomer() == p2) {
-						if ((route.get_requirment() + p1.c) <= _prob.depot.c) {
-							route.addToEnd(p1);
+					// check if any route ends in customer 2
+					if (route.getLastCustomer() == c2) {
+						// check if merging would go over capacity
+						if ((route.get_requirment() + c1.c) <= _prob.depot.c) {
+							// append customer to end of route
+							route.addToEnd(c1);
 						}
-						// check if customer can be added to front of route
-					} else if (route.getFirstCustomer() == p2) {
-						if ((route.get_requirment() + p1.c) <= _prob.depot.c) {
-							route.addToStart(p1);
+						// check if route starts with customer 2
+					} else if (route.getFirstCustomer() == c2) {
+						// check if merging will not go over capacity
+						if ((route.get_requirment() + c1.c) <= _prob.depot.c) {
+							// add customer to start
+							route.addToStart(c1);
 						}
 					}
 				}
 				// if second customer is not in a route
-			} else if (cust1 == false) {
+			} else if (cust2 == false) {
 				for (Route route : _routeList) {
-					// check if it can be added to end of existing route
-					if (route.getLastCustomer() == p1) {
-						if ((route.get_requirment() + p2.c) <= _prob.depot.c) {
-							route.addToEnd(p2);
+					// check if any routes end with customer 1
+					if (route.getLastCustomer() == c1) {
+						// check if merging will not go over capacity
+						if ((route.get_requirment() + c2.c) <= _prob.depot.c) {
+							// append customer to end of route
+							route.addToEnd(c2);
 						}
-						// check if it can be added to front of route
-					} else if (route.getFirstCustomer() == p1) {
-						if ((route.get_requirment() + p2.c) <= _prob.depot.c) {
-							route.addToStart(p2);
+						// check if any routes begin with customer 1
+					} else if (route.getFirstCustomer() == c1) {
+						// check if merging will not go over capacity
+						if ((route.get_requirment() + c2.c) <= _prob.depot.c) {
+							// append customer to start of route
+							route.addToStart(c2);
 						}
 					}
 				}
 			}
 		}
+		// move routes to solution array
 		for (Route r : _routeList) {
 			_soln.add(r.get_customerList());
 		}
 	}
 
 }
+// end of class

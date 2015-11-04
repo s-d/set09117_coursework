@@ -4,10 +4,10 @@ import java.util.List;
 public class Run {
 
 	public static void main(String[] args) throws Exception {
-		String problem = "rand00050prob";
+		String problem = "rand00010prob";
 		double cwCost;
 		List<Double> times = new ArrayList<>();
-		int loop = 10;
+		int loop = 1;
 		for (int i = 0; i < loop; i++) {
 			System.out.println(problem);
 			VRProblem p = new VRProblem(

@@ -1,7 +1,6 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
 
-public class Route {
+public class Route implements Comparable<Route> {
 
 	private ArrayList<Customer> _customerList;
 	private static Customer _depot;
@@ -72,5 +71,14 @@ public class Route {
 
 	public Customer getFirstCustomer() {
 		return _customerList.get(0);
+	}
+
+	@Override
+	public int compareTo(Route compareRoute) {
+		if (this._saving < compareRoute._saving) {
+			return 1;
+		} else {
+			return -1;
+		}
 	}
 }
