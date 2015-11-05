@@ -20,7 +20,6 @@ public class ClarkeWrightAlg {
 			r.calcSaving();
 		}
 		_pairs.sort(null);
-
 		buildRoutes();
 		return _soln;
 	}
@@ -142,11 +141,16 @@ public class ClarkeWrightAlg {
 	}
 
 	private void sortRoutes() {
-		Collections.sort(_routeList, new Comparator<Route>() {
-			public int compare(Route r1, Route r2) {
-				return r2.get_requirment() - r1.get_requirment();
-			}
-		});
+
+		for (Route r : _routeList) {
+			r.calcSaving();
+		}
+		_routeList.sort(null);
+		// Collections.sort(_routeList, new Comparator<Route>() {
+		// public int compare(Route r1, Route r2) {
+		// return r2.get_requirment() - r1.get_requirment();
+		// }
+		// });
 	}
 
 }
