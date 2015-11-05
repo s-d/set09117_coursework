@@ -19,7 +19,6 @@ public class ClarkeWrightAlg {
 		for (Route r : _pairs) {
 			r.calcSaving();
 		}
-		removeMirrors();
 		_pairs.sort(null);
 
 		buildRoutes();
@@ -35,7 +34,7 @@ public class ClarkeWrightAlg {
 		// loop through every customer
 		for (int i = 0; i < _prob.customers.size(); i++) {
 			// loop through every customer
-			for (int j = 0; j < _prob.customers.size(); j++) {
+			for (int j = i; j < _prob.customers.size(); j++) {
 				// if the pair is not the same customer twice
 				if (i != j) {
 					// create a new route
@@ -45,30 +44,6 @@ public class ClarkeWrightAlg {
 					route.addToEnd(_prob.customers.get(j));
 					// add route to ArrayList
 					_pairs.add(route);
-				}
-			}
-		}
-	}
-
-	// remove any redundant pairs
-	private void removeMirrors() {
-		// loop through every pair
-		for (int i = 0; i < _pairs.size(); i++) {
-			// loop through every pair after i
-			for (int j = i; j < _pairs.size(); j++) {
-				// if both pairs are not the same
-				if (i != j) {
-					// assign temporary objects
-					Route r1 = _pairs.get(i);
-					Route r2 = _pairs.get(j);
-					// if routes mirror each other
-					if (r1.get_customerList().get(0).equals(r2.get_customerList().get(1))
-							&& (r1.get_customerList().get(1).equals(r2.get_customerList().get(0)))) {
-						// remove redundant pair
-						_pairs.remove(j);
-						// decrement j to ensure position is kept relative
-						j--;
-					}
 				}
 			}
 		}

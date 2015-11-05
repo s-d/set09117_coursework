@@ -16,14 +16,26 @@ public class Route implements Comparable<Route> {
 	}
 
 	public void calcSaving() {
-		if (_pair) {
-			Customer d, c1, c2;
-			d = _depot;
-			c1 = getFirstCustomer();
-			c2 = getLastCustomer();
-			_saving = (d.distance(c1) + d.distance(c2)) - c1.distance(c2);
+		_saving = 0;
+		// if (_pair) {
+		// Customer d, c1, c2;
+		// d = _depot;
+		// c1 = getFirstCustomer();
+		// c2 = getLastCustomer();
+		// _saving = (d.distance(c1) + d.distance(c2)) - c1.distance(c2);
+		// } else {
+		double depotCost = 0, routeCost = 0;
+		for (Customer c : this._customerList) {
+			depotCost += _depot.distance(c);
+		}
+
+		for (int i = 0; i < this._customerList.size() - 1; i++) {
+			routeCost += _customerList.get(i).distance(_customerList.get(i + 1));
+			_saving = depotCost - routeCost;
 		}
 	}
+
+	// }
 
 	public void merge(Route r) {
 		for (Customer c : r.get_customerList()) {
