@@ -20,7 +20,9 @@ public class ClarkeWrightAlg {
 			r.calcSaving();
 		}
 		_pairs.sort(null);
+
 		// buildRoutes();
+
 		sequeltial();
 		return _soln;
 	}
@@ -37,13 +39,15 @@ public class ClarkeWrightAlg {
 			for (int j = i; j < _prob.customers.size(); j++) {
 				// if the pair is not the same customer twice
 				if (i != j) {
-					// create a new route
-					Route route = new Route();
-					// add each customer to route
-					route.addToEnd(_prob.customers.get(i));
-					route.addToEnd(_prob.customers.get(j));
-					// add route to ArrayList
-					_pairs.add(route);
+					if ((_prob.customers.get(i).c) + (_prob.customers.get(j).c) <= _prob.depot.c) {
+						// create a new route
+						Route route = new Route();
+						// add each customer to route
+						route.addToEnd(_prob.customers.get(i));
+						route.addToEnd(_prob.customers.get(j));
+						// add route to ArrayList
+						_pairs.add(route);
+					}
 				}
 			}
 		}
@@ -120,16 +124,24 @@ public class ClarkeWrightAlg {
 			}
 		}
 		sortRoutes();
+		for (Route r : _routeList) {
+			r.calcSaving();
+		}
 		for (int i = 0; i < _routeList.size(); i++) {
 			for (int j = 0; j < _routeList.size(); j++) {
 				Route r1 = _routeList.get(i);
 				Route r2 = _routeList.get(j);
-
 				if (r1.equals(r2) != true) {
 					int mergeCap = r1.get_requirment() + r2.get_requirment();
 					if (mergeCap <= _prob.depot.c) {
-						r1.merge(r2);
-						_routeList.remove(j);
+						Route temp = r1;
+						temp.merge(r2);
+						temp.calcSaving();
+						if (temp.get_saving() < r1.get_saving() + r2.get_saving()) {
+							r1.merge(r2);
+							_routeList.remove(j);
+							j--;
+						}
 					}
 				}
 			}
@@ -141,86 +153,73 @@ public class ClarkeWrightAlg {
 	}
 
 	private void sequeltial() {
-		System.out.println(_pairs.size());
-		this._routeList = new ArrayList<Route>();
-		boolean empty = false;
-		while (!empty) {
-			for (int i = 0; i < _pairs.size(); i++) {
-				if (_pairs.get(i).get_requirment() < _prob.depot.c) {
-					_routeList.add(_pairs.get(i));
-					_pairs.remove(i);
-					empty = true;
-					break;
+		// get first / best pair as starting route
+		_routeList = new ArrayList<Route>();
+		_routeList.add(_pairs.get(0));
+		_pairs.remove(0);
+
+		// loop through pairs
+		for (int i = 0; i < _pairs.size(); i++) {
+			Route p = _pairs.get(i);
+			Customer c1 = p.getFirstCustomer();
+			Customer c2 = p.getLastCustomer();
+			boolean cust1 = false, cust2 = false;
+
+			// check if either customer has been used in any route
+			for (int j = 0; j < _routeList.size(); j++) {
+				Route r = _routeList.get(j);
+				if (r.get_customerList().contains(c1)) {
+					cust1 = true;
+				} else if (r.get_customerList().contains(c2)) {
+					cust2 = true;
 				}
 			}
-		}
 
-		for (int i = 0; i < _pairs.size(); i++) {
-			// get customer from pair
-			Route p = _pairs.get(i);
-			if (p.get_requirment() <= _prob.depot.c) {
-
-				Customer c1 = _pairs.get(i).getFirstCustomer();
-				Customer c2 = _pairs.get(i).getLastCustomer();
-				// create booleans for each customer
-				boolean cust1 = false, cust2 = false;
-				// check if either customer from pair is already route
+			// if both customers have been used already
+			if ((cust1) && (cust2)) {
+				_pairs.remove(p);
+				i--;
+				break;
+				// if first hasn't been used
+			} else if (!cust1) {
 				for (int j = 0; j < _routeList.size(); j++) {
-					if (_routeList.get(j).get_customerList().contains(c1)) {
-						cust1 = true;
-					}
-					if (_routeList.get(j).get_customerList().contains(c2)) {
-						cust2 = true;
-					}
-				}
-				if (!cust1) {
-					for (int j = 0; j < _routeList.size(); j++) {
-						// check if any route ends in customer 2
-						if (_routeList.get(j).getLastCustomer() == c2) {
-							// check if merging would go over capacity
-							if ((_routeList.get(j).get_requirment() + c1.c) <= _prob.depot.c) {
-								// append customer to end of route
-								_routeList.get(j).addToEnd(c1);
-								_pairs.remove(i);
-								i--;
-							}
-						} else if (_routeList.get(j).getFirstCustomer() == c2) {
-							if ((_routeList.get(j).get_requirment() + c1.c) <= _prob.depot.c) {
-								// append customer to end of route
-								_routeList.get(j).addToStart(c1);
-								_pairs.remove(i);
-								i--;
-							}
+					Route r = _routeList.get(j);
+					// check if 2nd customer is in route
+					if (r.getFirstCustomer() == c2) {
+						if (c1.c + r.get_requirment() <= _prob.depot.c) {
+							r.addToStart(c1);
+							break;
+						}
+					} else if (r.getLastCustomer() == c2) {
+						if (c1.c + r.get_requirment() <= _prob.depot.c) {
+							r.addToEnd(c1);
+							break;
 						}
 					}
-				} else if (!cust2) {
-					for (int j = 0; j < _routeList.size(); j++) {
-						// check if any route ends in customer 2
-						if (_routeList.get(j).getLastCustomer() == c1) {
-							// check if merging would go over capacity
-							if ((_routeList.get(j).get_requirment() + c2.c) <= _prob.depot.c) {
-								// append customer to end of route
-								_routeList.get(j).addToEnd(c2);
-								_pairs.remove(i);
-								i--;
-							}
-						} else if (_routeList.get(j).getFirstCustomer() == c1) {
-							if ((_routeList.get(j).get_requirment() + c2.c) <= _prob.depot.c) {
-								// append customer to end of route
-								_routeList.get(j).addToStart(c2);
-								_pairs.remove(i);
-								i--;
-							}
+				}
+			} else if (!cust2) {
+				for (int j = 0; j < _routeList.size(); j++) {
+					Route r = _routeList.get(j);
+
+					if (r.getFirstCustomer() == c1) {
+						if (c2.c + r.get_requirment() <= _prob.depot.c) {
+							r.addToStart(c2);
+
+							break;
+						}
+					} else if (r.getLastCustomer() == c1) {
+						if (c2.c + r.get_requirment() <= _prob.depot.c) {
+							r.addToEnd(c2);
+							break;
 						}
 					}
 				}
 			} else {
-				_pairs.remove(i);
-				i--;
+
 			}
 		}
-		System.out.println(_pairs.size());
 
+		// end
 		for (
 
 		Route r : _routeList)
