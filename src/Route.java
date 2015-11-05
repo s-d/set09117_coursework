@@ -6,13 +6,11 @@ public class Route implements Comparable<Route> {
 	private static Customer _depot;
 	private double _saving;
 	private int _requirment;
-	private boolean _pair;
 
 	public Route() {
 		_customerList = new ArrayList<Customer>();
 		_saving = 0;
 		_requirment = 0;
-		_pair = false;
 	}
 
 	public void calcSaving() {
@@ -39,17 +37,11 @@ public class Route implements Comparable<Route> {
 	public void addToEnd(Customer cust) {
 		_customerList.add(cust);
 		_requirment += cust.c;
-		if (this._customerList.size() == 2) {
-			_pair = true;
-		}
 	}
 
 	public void addToStart(Customer cust) {
 		_customerList.add(0, cust);
 		_requirment += cust.c;
-		if (this._customerList.size() == 2) {
-			_pair = true;
-		}
 	}
 
 	public static void set_depot(Customer _depot) {

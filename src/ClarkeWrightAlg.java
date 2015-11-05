@@ -20,7 +20,8 @@ public class ClarkeWrightAlg {
 			r.calcSaving();
 		}
 		_pairs.sort(null);
-		buildRoutes();
+		// buildRoutes();
+		sequeltial();
 		return _soln;
 	}
 
@@ -132,7 +133,6 @@ public class ClarkeWrightAlg {
 					}
 				}
 			}
-
 		}
 		// move routes to solution array
 		for (Route r : _routeList) {
@@ -140,17 +140,103 @@ public class ClarkeWrightAlg {
 		}
 	}
 
-	private void sortRoutes() {
-
-		for (Route r : _routeList) {
-			r.calcSaving();
+	private void sequeltial() {
+		System.out.println(_pairs.size());
+		this._routeList = new ArrayList<Route>();
+		boolean empty = false;
+		while (!empty) {
+			for (int i = 0; i < _pairs.size(); i++) {
+				if (_pairs.get(i).get_requirment() < _prob.depot.c) {
+					_routeList.add(_pairs.get(i));
+					_pairs.remove(i);
+					empty = true;
+					break;
+				}
+			}
 		}
-		_routeList.sort(null);
-		// Collections.sort(_routeList, new Comparator<Route>() {
-		// public int compare(Route r1, Route r2) {
-		// return r2.get_requirment() - r1.get_requirment();
-		// }
-		// });
+
+		for (int i = 0; i < _pairs.size(); i++) {
+			// get customer from pair
+			Route p = _pairs.get(i);
+			if (p.get_requirment() <= _prob.depot.c) {
+
+				Customer c1 = _pairs.get(i).getFirstCustomer();
+				Customer c2 = _pairs.get(i).getLastCustomer();
+				// create booleans for each customer
+				boolean cust1 = false, cust2 = false;
+				// check if either customer from pair is already route
+				for (int j = 0; j < _routeList.size(); j++) {
+					if (_routeList.get(j).get_customerList().contains(c1)) {
+						cust1 = true;
+					}
+					if (_routeList.get(j).get_customerList().contains(c2)) {
+						cust2 = true;
+					}
+				}
+				if (!cust1) {
+					for (int j = 0; j < _routeList.size(); j++) {
+						// check if any route ends in customer 2
+						if (_routeList.get(j).getLastCustomer() == c2) {
+							// check if merging would go over capacity
+							if ((_routeList.get(j).get_requirment() + c1.c) <= _prob.depot.c) {
+								// append customer to end of route
+								_routeList.get(j).addToEnd(c1);
+								_pairs.remove(i);
+								i--;
+							}
+						} else if (_routeList.get(j).getFirstCustomer() == c2) {
+							if ((_routeList.get(j).get_requirment() + c1.c) <= _prob.depot.c) {
+								// append customer to end of route
+								_routeList.get(j).addToStart(c1);
+								_pairs.remove(i);
+								i--;
+							}
+						}
+					}
+				} else if (!cust2) {
+					for (int j = 0; j < _routeList.size(); j++) {
+						// check if any route ends in customer 2
+						if (_routeList.get(j).getLastCustomer() == c1) {
+							// check if merging would go over capacity
+							if ((_routeList.get(j).get_requirment() + c2.c) <= _prob.depot.c) {
+								// append customer to end of route
+								_routeList.get(j).addToEnd(c2);
+								_pairs.remove(i);
+								i--;
+							}
+						} else if (_routeList.get(j).getFirstCustomer() == c1) {
+							if ((_routeList.get(j).get_requirment() + c2.c) <= _prob.depot.c) {
+								// append customer to end of route
+								_routeList.get(j).addToStart(c2);
+								_pairs.remove(i);
+								i--;
+							}
+						}
+					}
+				}
+			} else {
+				_pairs.remove(i);
+				i--;
+			}
+		}
+		System.out.println(_pairs.size());
+
+		for (
+
+		Route r : _routeList)
+
+		{
+			_soln.add(r.get_customerList());
+		}
+
+	}
+
+	private void sortRoutes() {
+		Collections.sort(_routeList, new Comparator<Route>() {
+			public int compare(Route r1, Route r2) {
+				return r2.get_requirment() - r1.get_requirment();
+			}
+		});
 	}
 
 }
