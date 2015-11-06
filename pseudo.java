@@ -19,26 +19,26 @@ for (int i=0; i < maxCustomers; i++){
 					newR.add(sn.to);
 				}
             }else
-            //Find a route that ends at 'from'
+				//Find a route that ends at 'from'
                 if (sn.to not in a route ){
                     for(Route route: routes){
                         if (route.lastDelivery()== sn.from){
                             if (route.hasCapacity(sn.to.requirement)){
                                 route.add(sn.to);
-				break;
+								break;
                             }
                         }
                     }
                 }
 
 				
-					//Find a route that starts at 'to'
+			//Find a route that starts at 'to'
             if (sn.from not in a route){
                 for(Route route: routes){
                     if (route.lastDelivery() == sn.to){
                         if (route.hasCapacity(sn.from.requirement)){
                             route.addToStart(sn.from);
-			break;
+							break;
                         }
                     }
                 }

@@ -4,7 +4,7 @@ import java.util.List;
 public class Run {
 
 	public static void main(String[] args) throws Exception {
-		String problem = "rand00010prob";
+		String problem = "rand00050prob";
 		double cwCost;
 		List<Double> times = new ArrayList<>();
 		int loop = 1;
