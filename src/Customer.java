@@ -1,5 +1,6 @@
 import java.awt.geom.Point2D;
 
+@SuppressWarnings("serial")
 public class Customer extends Point2D.Double {
 
 	// Requirements of the customer (number to be delivered)

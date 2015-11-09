@@ -34,6 +34,15 @@ public class Route implements Comparable<Route> {
 		}
 	}
 
+	@Override
+	public int compareTo(Route compareRoute) {
+		if (this._saving < compareRoute._saving) {
+			return 1;
+		} else {
+			return -1;
+		}
+	}
+
 	public void addToEnd(Customer cust) {
 		_customerList.add(cust);
 		_requirment += cust.c;
@@ -42,6 +51,14 @@ public class Route implements Comparable<Route> {
 	public void addToStart(Customer cust) {
 		_customerList.add(0, cust);
 		_requirment += cust.c;
+	}
+
+	public Customer getLastCustomer() {
+		return _customerList.get(_customerList.size() - 1);
+	}
+
+	public Customer getFirstCustomer() {
+		return _customerList.get(0);
 	}
 
 	public static void set_depot(Customer _depot) {
@@ -60,20 +77,4 @@ public class Route implements Comparable<Route> {
 		return _requirment;
 	}
 
-	public Customer getLastCustomer() {
-		return _customerList.get(_customerList.size() - 1);
-	}
-
-	public Customer getFirstCustomer() {
-		return _customerList.get(0);
-	}
-
-	@Override
-	public int compareTo(Route compareRoute) {
-		if (this._saving < compareRoute._saving) {
-			return 1;
-		} else {
-			return -1;
-		}
-	}
 }
