@@ -4,25 +4,55 @@ import java.util.List;
 public class Run {
 
 	public static void main(String[] args) throws Exception {
-		String problem = "rand00010prob";
-		List<Double> times = new ArrayList<>();
-		int loop = 1;
-		for (int i = 0; i < loop; i++) {
-			VRProblem p = new VRProblem("test_data/" + problem + ".csv");
+
+		single("rand00010prob");
+		benchmark(10);
+
+	}
+
+	private static void single(String prob) throws Exception {
+		VRProblem p = new VRProblem("test_data/" + prob + ".csv");
+		VRSolution s = new VRSolution(p);
+
+		double startTime = System.currentTimeMillis();
+		s.cw();
+		double endTime = System.currentTimeMillis();
+
+		s.writeOut("solutions/" + prob + "Solution.csv");
+		s.writeSVG("solutions/" + prob + ".svg", "solutions/" + prob + "Solution.svg");
+
+		System.out.println(prob);
+		System.out.println(s.verify() + " solution");
+		System.out.println("cost: " + s.solnCost());
+
+		System.out.println("time: " + (endTime - startTime));
+	}
+
+	private static void benchmark(int loop) throws Exception {
+		String[] problems = new String[] { "rand00010prob", "rand00020prob", "rand00030prob", "rand00040prob",
+				"rand00050prob", "rand00060prob", "rand00070prob", "rand00080prob", "rand00090prob", "rand00100prob",
+				"rand00200prob", "rand00300prob", "rand00400prob", "rand00500prob", "rand00600prob", "rand00700prob",
+				"rand00800prob", "rand00900prob", "rand01000prob" };
+
+		for (String prob : problems) {
+			List<Double> times = new ArrayList<>();
+			VRProblem p = new VRProblem("test_data/" + prob + ".csv");
 			VRSolution s = new VRSolution(p);
 
-			double startTime = System.currentTimeMillis();
-			s.betterSolution();
-			double endTime = System.currentTimeMillis();
+			for (int i = 0; i < loop; i++) {
+				double startTime = System.currentTimeMillis();
+				s.cw();
+				double endTime = System.currentTimeMillis();
 
-			s.writeOut("solutions/" + problem + "Solution.csv");
-			s.writeSVG("solutions/" + problem + ".svg", "solutions/" + problem + "Solution.svg");
+				s.writeOut("solutions/" + prob + "Solution.csv");
+				s.writeSVG("solutions/" + prob + ".svg", "solutions/" + prob + "Solution.svg");
 
-			System.out.println(problem);
+				times.add(endTime - startTime);
+			}
+			System.out.println(prob);
 			System.out.println(s.verify() + " solution");
-			System.out.println("clarke wright cost = " + s.solnCost());
-			times.add(endTime - startTime);
+			System.out.println("cost: " + s.solnCost());
+			System.out.println(times + "\n");
 		}
-		System.out.println(times);
 	}
 }

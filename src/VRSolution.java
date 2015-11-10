@@ -21,7 +21,7 @@ public class VRSolution {
 	}
 
 	// Students should implement another solution
-	public void betterSolution() {
+	public void cw() {
 		ClarkeWrightAlg cw = new ClarkeWrightAlg();
 		this.soln = cw.solution(prob);
 	}

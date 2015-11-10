@@ -2,28 +2,34 @@ import java.util.ArrayList;
 
 public class ClarkeWrightAlg {
 	// variables
-	private ArrayList<Route> _pairs;
 	private VRProblem _prob;
-	private ArrayList<ArrayList<Customer>> _soln;
+	private ArrayList<Route> _pairs;
 
 	// create routes using Clarke & Wright Algorithm
 	public ArrayList<ArrayList<Customer>> solution(VRProblem prob) {
+		// define variables
+		ArrayList<ArrayList<Customer>> sol = new ArrayList<ArrayList<Customer>>();
 		this._prob = prob;
-		this._soln = new ArrayList<ArrayList<Customer>>();
+
+		// create pairs
 		createPairs();
+		// sort pairs in descending order of savings
 		_pairs.sort(null);
+		// build final routes and add them to solution
 		for (Route route : simple()) {
-			_soln.add(route.get_customerList());
+			sol.add(route.get_customerList());
 		}
-		return _soln;
+		// return solution
+		return sol;
 	}
 
 	// creates routes for every possible pair of customers
 	private void createPairs() {
-		// set the depot of all routes so costs can be calculated later
-		Route.set_depot(_prob.depot);
-		// declare ArrayList for storage of pairs
+		// define ArrayList for storage of pairs
 		this._pairs = new ArrayList<Route>();
+
+		// set the depot of all routes so costs/savings can be calculated later
+		Route.set_depot(_prob.depot);
 		// loop through every customer
 		for (int i = 0; i < _prob.customers.size(); i++) {
 			// loop through every customer
@@ -51,13 +57,14 @@ public class ClarkeWrightAlg {
 		Route currentPair;
 		Customer cust1, cust2;
 		boolean c1, c2;
+
 		// loop through every pair of customers
 		for (int i = 0; i < _pairs.size(); i++) {
 			// get customer from pair
 			currentPair = _pairs.get(i);
 			cust1 = currentPair.getFirstCustomer();
 			cust2 = currentPair.getLastCustomer();
-			// create booleans for each customer
+			// reset booleans for each customer
 			c1 = false;
 			c2 = false;
 			// check if either customer from pair is already route
@@ -65,6 +72,7 @@ public class ClarkeWrightAlg {
 				if (routes.get(j).get_customerList().contains(cust1)) {
 					c1 = true;
 				}
+
 				if (routes.get(j).get_customerList().contains(cust2)) {
 					c2 = true;
 				}
@@ -107,7 +115,6 @@ public class ClarkeWrightAlg {
 				// if second customer is not in a route
 			} else if (c2 == false) {
 				for (Route route : routes) {
-
 					// check if any routes end with customer 1
 					if (route.getLastCustomer() == cust1) {
 						// check if merging will not go over capacity
