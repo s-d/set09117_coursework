@@ -6,7 +6,7 @@ public class Run {
 	public static void main(String[] args) throws Exception {
 
 		single("rand00010prob");
-		benchmark(10);
+		benchmark(100);
 
 	}
 
