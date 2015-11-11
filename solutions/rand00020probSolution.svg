@@ -1,10 +1,26 @@
 <?xml version='1.0'?>
 <!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' '../../svg11-flat.dtd'>
 <svg width='8cm' height='8cm' viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg' version='1.1'>
-<path d='M250.0 250.0 L278.0 261.0L454.0 475.0L441.0 492.0L327.0 441.0L310.0 392.0z' stroke='chocolate' fill='none' stroke-width='2'/>
-<path d='M250.0 250.0 L491.0 176.0L493.0 88.0L430.0 127.0L356.0 51.0L330.0 138.0L293.0 153.0z' stroke='cornflowerblue' fill='none' stroke-width='2'/>
-<path d='M250.0 250.0 L168.0 371.0L105.0 447.0L146.0 499.0L257.0 451.0z' stroke='crimson' fill='none' stroke-width='2'/>
-<path d='M250.0 250.0 L147.0 276.0L97.0 241.0L44.0 164.0L31.0 80.0L184.0 162.0z' stroke='cyan' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L44.0 164.0z' stroke='chocolate' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L430.0 127.0z' stroke='cornflowerblue' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L454.0 475.0z' stroke='crimson' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L330.0 138.0z' stroke='cyan' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L491.0 176.0z' stroke='darkblue' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L31.0 80.0z' stroke='darkcyan' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L147.0 276.0z' stroke='darkgoldenrod' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L97.0 241.0z' stroke='chocolate' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L310.0 392.0z' stroke='cornflowerblue' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L493.0 88.0z' stroke='crimson' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L278.0 261.0z' stroke='cyan' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L184.0 162.0z' stroke='darkblue' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L105.0 447.0z' stroke='darkcyan' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L356.0 51.0z' stroke='darkgoldenrod' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L168.0 371.0z' stroke='chocolate' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L146.0 499.0z' stroke='cornflowerblue' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L327.0 441.0z' stroke='crimson' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L293.0 153.0z' stroke='cyan' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L441.0 492.0z' stroke='darkblue' fill='none' stroke-width='2'/>
+<path d='M250.0 250.0 L257.0 451.0z' stroke='darkcyan' fill='none' stroke-width='2'/>
 <g transform='translate(44,164)'><circle cx='0' cy='0' r='10' fill='pink' stroke='black' stroke-width='1'/><text text-anchor='middle' y='5'>2</text></g>
 <g transform='translate(430,127)'><circle cx='0' cy='0' r='10' fill='pink' stroke='black' stroke-width='1'/><text text-anchor='middle' y='5'>7</text></g>
 <g transform='translate(454,475)'><circle cx='0' cy='0' r='10' fill='pink' stroke='black' stroke-width='1'/><text text-anchor='middle' y='5'>10</text></g>

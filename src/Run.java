@@ -6,7 +6,7 @@ public class Run {
 	public static void main(String[] args) throws Exception {
 
 		single("rand00010prob");
-		benchmark(100);
+		benchmark(1);
 
 	}
 
@@ -41,7 +41,7 @@ public class Run {
 
 			for (int i = 0; i < loop; i++) {
 				double startTime = System.currentTimeMillis();
-				s.cw();
+				s.oneRoutePerCustomerSolution();
 				double endTime = System.currentTimeMillis();
 
 				s.writeOut("solutions/" + prob + "Solution.csv");
@@ -50,9 +50,9 @@ public class Run {
 				times.add(endTime - startTime);
 			}
 			System.out.println(prob);
-			System.out.println(s.verify() + " solution");
+			// System.out.println(s.verify() + " solution");
 			System.out.println("cost: " + s.solnCost());
-			System.out.println(times + "\n");
+			// System.out.println(times + "\n");
 		}
 	}
 }
