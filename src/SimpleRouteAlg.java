@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 
-public class ClarkeWrightAlg {
+//returns solution to a problem using SRAlg
+public class SimpleRouteAlg {
 	// variables
 	private VRProblem _prob;
 	private ArrayList<Route> _pairs;
 
-	// create routes using Clarke & Wright Algorithm
+	// create routes using Simple Route Algorithm
 	public ArrayList<ArrayList<Customer>> solution(VRProblem prob) {
 		// define variables
 		ArrayList<ArrayList<Customer>> sol = new ArrayList<ArrayList<Customer>>();
@@ -16,7 +17,7 @@ public class ClarkeWrightAlg {
 		// sort pairs in descending order of savings
 		_pairs.sort(null);
 		// build final routes and add them to solution
-		for (Route route : simple()) {
+		for (Route route : buildRoutes()) {
 			sol.add(route.get_customerList());
 		}
 		// return solution
@@ -51,7 +52,7 @@ public class ClarkeWrightAlg {
 	}
 
 	// combine pairs to create full routes
-	private ArrayList<Route> simple() {
+	private ArrayList<Route> buildRoutes() {
 		// declare variables
 		ArrayList<Route> routes = new ArrayList<Route>();
 		Route currentPair;
