@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.11.13)  15 NOV 2015 22:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.11.13)  16 NOV 2015 18:10
 entering extended mode
 **report.tex
 (report.tex
@@ -361,21 +361,21 @@ File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 Package: lipsum 2014/07/27 v1.3 150 paragraphs of Lorem Ipsum dummy text
 \c@lips@count=\count125
 ) (report.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 84.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 85.
+LaTeX Font Info:    ... okay on input line 85.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 85.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.fd"
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
@@ -399,7 +399,7 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box34
-Package hyperref Info: Link coloring ON on input line 84.
+Package hyperref Info: Link coloring ON on input line 85.
  ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -408,78 +408,78 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count132
 )
-LaTeX Info: Redefining \ref on input line 84.
-LaTeX Info: Redefining \pageref on input line 84.
-LaTeX Info: Redefining \nameref on input line 84.
+LaTeX Info: Redefining \ref on input line 85.
+LaTeX Info: Redefining \pageref on input line 85.
+LaTeX Info: Redefining \nameref on input line 85.
 \c@lstlisting=\count133
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 84.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 85.
+(lastpage)             ! on input line 85.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 87.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1phv.fd"
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 13.24796pt on input line 85.
+(Font)              scaled to size 13.24796pt on input line 87.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 85.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 87.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 13.24796pt on input line 85.
+(Font)              scaled to size 13.24796pt on input line 87.
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 11.03998pt on input line 86.
+(Font)              scaled to size 11.03998pt on input line 88.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 86.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 88.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 11.03998pt on input line 86.
+(Font)              scaled to size 11.03998pt on input line 88.
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 89.
+(Font)              scaled to size 8.27998pt on input line 91.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <9> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 89.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 91.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 8.27998pt on input line 89.
+(Font)              scaled to size 8.27998pt on input line 91.
 
 <./images/cw30.png, id=5, 227.34938pt x 227.34938pt>
 File: ./images/cw30.png Graphic file (type png)
  <use ./images/cw30.png>
-Package pdftex.def Info: ./images/cw30.png used on input line 98.
+Package pdftex.def Info: ./images/cw30.png used on input line 100.
 (pdftex.def)             Requested size: 185.20874pt x 185.21004pt.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 98.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 100.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 98.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 100.
 
 <./images/sr30.png, id=7, 227.34938pt x 227.34938pt>
 File: ./images/sr30.png Graphic file (type png)
  <use ./images/sr30.png>
-Package pdftex.def Info: ./images/sr30.png used on input line 121.
+Package pdftex.def Info: ./images/sr30.png used on input line 123.
 (pdftex.def)             Requested size: 185.20874pt x 185.21004pt.
 
 [1{C:/Users/Sam Dixon/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 
  <./images/cw30.png> <./images/sr30.png>]
-<./images/chart1.png, id=31, 477.28313pt x 285.31593pt>
+<./images/chart1.png, id=32, 477.28313pt x 285.31593pt>
 File: ./images/chart1.png Graphic file (type png)
 
 <use ./images/chart1.png>
 Package pdftex.def Info: ./images/chart1.png used on input line 148.
 (pdftex.def)             Requested size: 505.89pt x 302.41603pt.
 
-<./images/chart3.png, id=32, 535.2497pt x 288.3272pt>
+<./images/chart3.png, id=33, 535.2497pt x 288.3272pt>
 File: ./images/chart3.png Graphic file (type png)
 
 <use ./images/chart3.png>
 Package pdftex.def Info: ./images/chart3.png used on input line 152.
 (pdftex.def)             Requested size: 505.89pt x 272.52342pt.
- <./images/chart2.png, id=33, 481.8pt x 288.3272pt>
+ <./images/chart2.png, id=34, 481.8pt x 288.3272pt>
 File: ./images/chart2.png Graphic file (type png)
 
 <use ./images/chart2.png>
 Package pdftex.def Info: ./images/chart2.png used on input line 156.
 (pdftex.def)             Requested size: 505.89pt x 302.75247pt.
 
-<./images/chart4.png, id=34, 477.28313pt x 285.31593pt>
+<./images/chart4.png, id=35, 477.28313pt x 285.31593pt>
 File: ./images/chart4.png Graphic file (type png)
 
 <use ./images/chart4.png>
@@ -498,13 +498,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 164--193
 [2
 
 ] [3 <./images/chart1.png> <./images/chart3.png>] [4 <./images/chart2.png> <./i
-mages/chart4.png>] <./images/cw60.png, id=59, 227.34938pt x 227.34938pt>
+mages/chart4.png>] <./images/cw60.png, id=60, 227.34938pt x 227.34938pt>
 File: ./images/cw60.png Graphic file (type png)
 
 <use ./images/cw60.png>
 Package pdftex.def Info: ./images/cw60.png used on input line 200.
 (pdftex.def)             Requested size: 185.20874pt x 185.21004pt.
- <./images/sr60.png, id=60, 227.34938pt x 227.34938pt>
+ <./images/sr60.png, id=61, 227.34938pt x 227.34938pt>
 File: ./images/sr60.png Graphic file (type png)
 
 <use ./images/sr60.png>
@@ -583,32 +583,40 @@ LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <8.5> not available
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <8.5> not available
 (Font)              size <8> substituted on input line 50.
 
-) (../src/VRSolution.java) (../src/simpleRouteAlg.java
+) (../src/VRSolution.java) (../src/Route.java)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [6])
-(report.bbl) 
+ [6]
+(../src/simpleRouteAlg.java
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+)
+(report.bbl
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7])
+
 AED: lastpage setting LastPage
-[7
+[8
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 239.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 239.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 242.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 242.
  (report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 239.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 239.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 242.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 242.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.75pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 239.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 242.
  ) 
 Here is how much of TeX's memory you used:
- 9596 strings out of 493673
- 140671 string characters out of 3143945
- 857584 words of memory out of 3000000
- 12534 multiletter control sequences out of 15000+200000
+ 9716 strings out of 493673
+ 142418 string characters out of 3143945
+ 881766 words of memory out of 3000000
+ 12561 multiletter control sequences out of 15000+200000
  29346 words of font info for 58 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  43i,11n,58p,732b,1809s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -619,9 +627,9 @@ s/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX
 es/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmbi8a.pfb><C
 :/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/M
 iKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (7 pages, 275051 bytes).
+Output written on report.pdf (8 pages, 290842 bytes).
 PDF statistics:
- 404 PDF objects out of 1000 (max. 8388607)
- 273 named destinations out of 1000 (max. 500000)
+ 516 PDF objects out of 1000 (max. 8388607)
+ 363 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

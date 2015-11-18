@@ -4,7 +4,7 @@ import java.util.List;
 public class Execute {
 
 	public static void main(String[] args) throws Exception {
-		single("rand00010prob");
+		// single("rand00010prob");
 		benchmark(1);
 	}
 
@@ -74,6 +74,7 @@ public class Execute {
 			// cost of problem
 			System.out.println("cost: " + s.solnCost());
 			System.out.println(times);
+			System.out.println();
 		}
 	}
 
