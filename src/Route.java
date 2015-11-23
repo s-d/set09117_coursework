@@ -27,13 +27,11 @@ public class Route implements Comparable<Route> {
 			// calculate distance travelled if only that customer is visited
 			depotCost += _depot.distance(c);
 		}
-
 		// loop through each customer
 		for (int i = 0; i < this._customerList.size() - 1; i++) {
 			// calculate distance between each customer and its neighbour
 			routeCost += _customerList.get(i).distance(_customerList.get(i + 1));
 		}
-
 		// saving is difference between single customer cost and route cost
 		_saving = depotCost - routeCost;
 	}

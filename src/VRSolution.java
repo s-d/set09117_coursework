@@ -26,7 +26,7 @@ public class VRSolution {
 		this.soln = cw.solution(prob);
 	}
 
-	// returns the number of rutes neede to complete a solution
+	// returns the number of routes needed to complete a solution
 	public int numberOfRoutes() {
 		return soln.size();
 	}
